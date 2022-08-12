@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\{User,Address};
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class RegisterController extends Controller
         return view('auth.register');
 
     }
-    public function store(Request $request){
+    public function store(RegisterRequest $request){
         $requestData = $request->all();
 
      

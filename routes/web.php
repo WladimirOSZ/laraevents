@@ -13,6 +13,9 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){
+    return 'teste';
+});
 
 Route::get('register',[RegisterController::class,'create'])->name('auth.register.create');
 Route::post('register', [RegisterController::class,'store'])->name('auth.register.store');
