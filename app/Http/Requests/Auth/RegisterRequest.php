@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\cpf;
 
 class RegisterRequest extends FormRequest
 {
@@ -25,9 +26,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'user.name' => 'required',
-            'user.email' =>['required', 'email'],
-            'user.cpf' => 'required',
-            'user.password' =>['required', 'min:8'],
+            'user.email' =>['required', 'email', 'unique:users,email'],
+            'user.cpf' => ['required',new cpf, 'unique:users,cpf'],
+            'user.password' =>['required', 'min:8', 'confirmed'],
             'phones.0.number' => ['required', 'size:14'],
             'phones.1.number' => ['required', 'size:15'],
             'address.cep'=> 'required',
@@ -57,6 +58,12 @@ class RegisterRequest extends FormRequest
             'address.number'=>'numero',
             'address.district'=>'bairro',
             'address.complement'=>'complemento',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'required' => 'O campo :attribute deve ser preenchido'
         ];
     }
 }

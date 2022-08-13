@@ -29,14 +29,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control {{$errors->has('user.cpf') ? 'is-invalid' : ''}}" placeholder="CPF" name="user[cpf]" value="{{old('user.cpf')}}">
+                            <input type="text" class="form-control cpf {{$errors->has('user.cpf') ? 'is-invalid' : ''}}" placeholder="CPF" name="user[cpf]" value="{{old('user.cpf')}}">
                             <div class="invalid-feedback">{{ $errors->first('user.cpf') }}</div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-group">
-                            <input type="password" class="form-control {{$errors->has('user.password') ? 'is-invalid' : ''}}" placeholder="Senha" name="user[password]" value="{{old('user.password')}}">
+                            <input type="password" class="form-control {{$errors->has('user.password') ? 'is-invalid' : ''}}" placeholder="Senha" name="user[password]" >
                             <div class="invalid-feedback">{{ $errors->first('user.password') }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="confirmar senha" name="user[password_confirmation]" >
                         </div>
                     </div>
                 </div>
@@ -45,13 +51,16 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <input type="text"  class="form-control {{$errors->has('address.cep') ? 'is-invalid' : ''}} " placeholder="CEP" name="address[cep]" value="{{old('address.cep')}}">
+                        <input type="text"  class="form-control cep
+                         {{$errors->has('address.cep') ? 'is-invalid' : ''}} " placeholder="CEP"
+                          name="address[cep]" value="{{old('address.cep')}}"
+                          id="cep">
                         <div class="invalid-feedback">{{ $errors->first('address.cep') }}</div>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input type="text"  class="form-control {{$errors->has('address.uf') ? 'is-invalid' : ''}}" placeholder="UF" name="address[uf]" value="{{old('address.uf')}}">
+                        <input type="text"  class="form-control uf {{$errors->has('address.uf') ? 'is-invalid' : ''}}" placeholder="UF" name="address[uf]" value="{{old('address.uf')}}">
                         <div class="invalid-feedback">{{ $errors->first('address.uf') }}</div>
                     </div>
                 </div>
@@ -90,13 +99,13 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" name="phones[0][number]" class="form-control {{$errors->has('phones.0.number') ? 'is-invalid' : ''}}" placeholder="Telefone" value="{{old('phones.0.number')}}">
+                        <input type="text" name="phones[0][number]" class=" phone form-control {{$errors->has('phones.0.number') ? 'is-invalid' : ''}}" placeholder="Telefone" value="{{old('phones.0.number')}}">
                         <div class="invalid-feedback">{{ $errors->first('phones.0.number') }}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" name="phones[1][number]" class="form-control {{$errors->has('phones.1.number') ? 'is-invalid' : ''}}" placeholder="Celular" value="{{old('phones.1.number')}}">
+                        <input type="text" name="phones[1][number]" class="cellphone form-control {{$errors->has('phones.1.number') ? 'is-invalid' : ''}}" placeholder="Celular" value="{{old('phones.1.number')}}">
                         <div class="invalid-feedback">{{ $errors->first('phones.1.number') }}</div>
                     </div>
                 </div>
@@ -104,5 +113,20 @@
                 <button type="submit" class="btn btn-success btn-block mt-3">Criar conta</button>
             </form>
         </div>
+
+        <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+        <script src="{{asset('vendor/jquery-mask/jquery.mask.min.js')}}"></script>
+
+        <script>
+            $('.cpf').mask('000.000.000-00');
+            $('.cep').mask('00000-00');
+            $('.uf').mask('SS');
+            $('.phone').mask('(00) 0000-0000');
+            $('.cellphone').mask('(00) 00000-0000');
+
+            $(document).on('blur', '#cep', function(){
+                const cep = $(this)
+            });
+        </script>
 </body>
 </html>
