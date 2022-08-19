@@ -125,8 +125,20 @@
             $('.cellphone').mask('(00) 00000-0000');
 
             $(document).on('blur', '#cep', function(){
-                const cep = $(this)
+                const cep = $(this).val();
+                $.ajax({
+                    url: 'https://viacep.com.br/ws/'+cep+'/json',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data){
+                        console.log(data);
+                    }
+                });
+
+
             });
+
+
         </script>
 </body>
 </html>
