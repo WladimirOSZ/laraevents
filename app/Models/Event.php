@@ -25,6 +25,11 @@ class Event extends Model
         'participants_limit'
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function setStartDateAttribute($value)
     {
         $this->attributes['start_date'] = Carbon::createFromFormat('d/m/Y H:i', $value)
