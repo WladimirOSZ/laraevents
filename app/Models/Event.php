@@ -27,7 +27,7 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('present');
     }
 
     public function setStartDateAttribute($value)

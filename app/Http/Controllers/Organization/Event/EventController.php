@@ -39,6 +39,7 @@ class EventController extends Controller
     {
         return view('organization.events.show',[
             'event'=>$event,
+            'eventStartDateHasPassed' => EventService::eventStartDateHasPassed($event),
             'eventEndDateHasPassed'=> EventService::eventEndDateHasPassed($event),
             'allParticipantUsers'=> User::query()
                 ->where('role', 'participant')

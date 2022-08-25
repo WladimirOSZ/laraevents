@@ -61,19 +61,38 @@
                             <td>{{ $user->name }} </td>
                             <td class="text-right">
                                 <div class="d-flex align-items-center justify-content-end">
-                                    <form method="POST" action="
-                                    {{ route('organization.events.subscription.destroy', [
-                                        'event'=>$event->id,
-                                        'user'=> $user->id
-                                    ]) }}
-                                    ">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">
-                                        Remover inscrição
-                                    </button>
+                                    @if($eventStartDateHasPassed)
 
-                                    </form>
+                                        <form method="POST" action="
+                                        {{ route('organization.events.presences', [
+                                            'event'=>$event->id,
+                                            'user'=> $user->id
+                                        ]) }}
+                                        ">
+                                        @csrf
+                                        <button class="btn btn-sm mr-2 {{$user->pivot->present ? 'btn-danger' : 'btn-success'}}">
+                                            {{$user->pivot->present ? 'Remover Presença' : 'Assinar Presença'}}
+                                        </button>
+
+                                        </form>
+                                    @endif
+                                    @if (!$eventEndDateHasPassed)
+                                        <form method="POST" action="
+                                        {{ route('organization.events.subscription.destroy', [
+                                            'event'=>$event->id,
+                                            'user'=> $user->id
+                                        ]) }}
+                                        ">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger">
+                                            Remover inscrição
+                                        </button>
+
+                                        </form>
+                                    @endif
+
+
                                 </div>
                             </td>
                         </tr>
